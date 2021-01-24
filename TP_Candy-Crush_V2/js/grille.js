@@ -199,6 +199,48 @@ class Grille {
     return this.nbAlignements !== 0;
   }
 
+  detecteTousLesAlignementsDe3(){
+    this.nbAlignements = 0;
+
+    // pour chaque ligne on va appeler detecteAlignementLigne et idem pour chaque colonne
+    for (let l = 0; l < this.nbLignes; l++) {
+      this.detecteAlignementLigneDe3(l);
+    }
+
+    for (let c = 0; c < this.nbColonnes; c++) {
+      this.detecteAlignementColonneDe3(c);
+    }
+    
+  
+
+    return this.nbAlignements !== 0;
+  }
+
+  detecteAlignementLigneDe3(ligne) {
+    // on va parcourir la ligne et voir si on des alignements
+    let ligneGrille = this.tabCookies[ligne];
+
+    //console.log(ligneGrille); // ok ça, c'est le tableau des cookies sur la ligne
+    // on va le parcourir de l'index 0 à l'index 6 inclu (this.nbColonnes -3);le dernier
+    // triplet testé sera composé des cookies aux indexes 6, 7 et 8 (on va de 0 à 9)
+
+    for (let l = 0; l <= this.nbColonnes - 3; l++) {
+      //console.log("Je teste les indexes " + l + " " + (l + 1) + " " + (l + 2));
+      let cookie1 = ligneGrille[l];
+      let cookie2 = ligneGrille[l + 1];
+      let cookie3 = ligneGrille[l + 2];
+
+      if (cookie1.type === cookie2.type && cookie1.type === cookie3.type) {
+        // on marque les trois
+        cookie1.selectionnee();
+        cookie2.selectionnee();
+        cookie3.selectionnee();
+
+        this.nbAlignements++;
+      }
+    }
+  }
+
   detecteAlignementLigne(ligne) {
     // on va parcourir la ligne et voir si on des alignements
     let ligneGrille = this.tabCookies[ligne];
@@ -218,6 +260,25 @@ class Grille {
         cookie1.supprimer();
         cookie2.supprimer();
         cookie3.supprimer();
+        this.nbAlignements++;
+      }
+    }
+  }
+
+  detecteAlignementColonneDe3(colonne) {
+    // on veut afficher les cookies situées sur une colonne donnée
+    for (let ligne = 0; ligne <= this.nbLignes - 3; ligne++) {
+      //console.log("On va examiner la case " + ligne + " " + colonne);
+      let cookie1 = this.tabCookies[ligne][colonne];
+      let cookie2 = this.tabCookies[ligne + 1][colonne];
+      let cookie3 = this.tabCookies[ligne + 2][colonne];
+
+      if (cookie1.type === cookie2.type && cookie1.type === cookie3.type) {
+        // on marque les trois
+        cookie1.selectionnee();
+        cookie2.selectionnee();
+        cookie3.selectionnee();
+
         this.nbAlignements++;
       }
     }
