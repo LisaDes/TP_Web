@@ -21,7 +21,19 @@ class Grille {
   drawGrille(ctx) {
     ctx.save();
     // todo : dessiner une grille
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = "grey";
 
+    for (let x=this.largeurColonnes; x<this.canvasLargeur; x+= this.largeurColonnes){
+      ctx.moveTo(x,0);
+      ctx.lineTo(x,this.canvasHauteur);
+    }
+
+    for (let y=this.hauteurLignes; y<this.canvasHauteur; y+= this.hauteurLignes){
+      ctx.moveTo(0,y);
+      ctx.lineTo(this.canvasLargeur,y);
+    }
+    ctx.stroke();
     ctx.restore();
   }
   /**
@@ -33,6 +45,18 @@ class Grille {
   showCookies(ctx) {
     // TODO dessiner les cookies dans la grille
     ctx.save();
+    // todo : dessiner une grille
+    //ctx.fillRect(10,10,100,100);
+    //ctx.drawImage(this.assets.croissant, 10,10);
+    let x = this.hauteurLignes * -1 + 10;
+    for (let l = 0; l < this.nbLignes; l++) {
+      let y = this.largeurColonnes * -1 + 10;
+      x += this.hauteurLignes;
+      for(let c = 0; c < this.nbColonnes; c++) {
+        y += this.largeurColonnes; 
+        this.tabCookies[l][c].draw(ctx,x,y);
+      }
+    }
 
     ctx.restore();
   }
@@ -54,5 +78,32 @@ class Grille {
     this.tabCookies = create2DArray(this.nbLignes);
 
     // TODO : remplir le tableau avec des cookies au hasard
+    for(let l=0; l<this.nbLignes; l++){
+      for(let c=0; c<this.nbColonnes; c++){
+        let type=Math.floor(nbDeCookiesDifferents * Math.random());
+        let cookie;
+        switch (type){
+          case 0:
+            cookie = new Cookie(type,l,c,this.assets.croissant);
+            break;
+          case 1:
+            cookie = new Cookie(type,l,c,this.assets.cupcake);
+            break;
+          case 2:
+            cookie = new Cookie(type,l,c,this.assets.danish);
+            break;
+          case 3:
+            cookie = new Cookie(type,l,c,this.assets.donut);
+            break;
+          case 4:
+            cookie = new Cookie(type,l,c,this.assets.macaroon);
+            break;
+          case 5:
+            cookie = new Cookie(type,l,c,this.assets.sugarCookie);
+            break;
+        }
+        this.tabCookies[l][c]=cookie;
+      }
+    }
   }
 }

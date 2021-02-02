@@ -19,7 +19,7 @@ function init() {
     canvasHauteur = canvas.height;
 
     grille = new Grille(9, 9, canvasLargeur, canvasHauteur, assetsLoaded);
-    //grille.drawGrille(ctx);
-    //grille.showCookies(ctx);
+    grille.drawGrille(ctx);
+    grille.showCookies(ctx);
   });
 }

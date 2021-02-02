@@ -4,16 +4,15 @@ class Cookie {
     this.ligne = ligne;
     this.colonne = colonne;
 
-    this.htmlImage = image; // pour canvas
-    this.htmlImage.width = 80;
-    this.htmlImage.height = 80;
-    this.htmlImage.dataset.ligne = ligne;
-    this.htmlImage.dataset.colonne = colonne;
+    this.image = image; // pour canvas
+    this.width = 80;
+    this.height = 80;
   }
 
-  draw(ctx, x, y, l, h) {
+  draw(ctx, x, y) {
     ctx.save();
     // A FAIRE !
+    ctx.drawImage(this.image,x,y);
     ctx.restore();
   }
 }
