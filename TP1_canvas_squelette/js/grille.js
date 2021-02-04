@@ -21,19 +21,33 @@ class Grille {
   drawGrille(ctx) {
     ctx.save();
     // todo : dessiner une grille
+    // on est en mode "path"
+    ctx.beginPath();
     ctx.lineWidth = 5;
-    ctx.strokeStyle = "grey";
+    ctx.strokeStyle = "lightgrey";
 
-    for (let x=this.largeurColonnes; x<this.canvasLargeur; x+= this.largeurColonnes){
-      ctx.moveTo(x,0);
-      ctx.lineTo(x,this.canvasHauteur);
+    // lignes verticales de la grille
+    for (
+      let x = this.largeurColonnes;
+      x < this.canvasLargeur;
+      x += this.largeurColonnes
+    ) {
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x, this.canvasHauteur);
     }
 
-    for (let y=this.hauteurLignes; y<this.canvasHauteur; y+= this.hauteurLignes){
-      ctx.moveTo(0,y);
-      ctx.lineTo(this.canvasLargeur,y);
+    // lignes verticales de la grille
+    for (
+      let y = this.hauteurLignes;
+      y < this.canvasHauteur;
+      y += this.hauteurLignes
+    ) {
+      ctx.moveTo(0, y);
+      ctx.lineTo(this.canvasLargeur, y);
     }
+
     ctx.stroke();
+
     ctx.restore();
   }
   /**
@@ -43,24 +57,28 @@ class Grille {
    * et implémenter la logique du jeu.
    */
   showCookies(ctx) {
-    // TODO dessiner les cookies dans la grille
     ctx.save();
-    // todo : dessiner une grille
-    //ctx.fillRect(10,10,100,100);
-    //ctx.drawImage(this.assets.croissant, 10,10);
-    let x = this.hauteurLignes * -1 + 10;
+    // TODO dessiner les cookies dans la grille
+    let y = 0;
     for (let l = 0; l < this.nbLignes; l++) {
-      let y = this.largeurColonnes * -1 + 10;
-      x += this.hauteurLignes;
-      for(let c = 0; c < this.nbColonnes; c++) {
-        y += this.largeurColonnes; 
-        this.tabCookies[l][c].draw(ctx,x,y);
-      }
-    }
+      let x = 7;
+      for (let c = 0; c < this.nbColonnes; c++) {
+        let cookie = this.tabCookies[l][c];
 
+        cookie.draw(ctx, x, y);
+        x += this.largeurColonnes;
+      }
+      y += this.hauteurLignes;
+    }
     ctx.restore();
   }
 
+  getCookie(x, y) {
+    let c = Math.floor(x / this.largeurColonnes);
+    let l = Math.floor(y / this.hauteurLignes);
+
+    return this.tabCookies[l][c];
+  }
 
   /**
    * Initialisation du niveau de départ. Le paramètre est le nombre de cookies différents
@@ -78,31 +96,31 @@ class Grille {
     this.tabCookies = create2DArray(this.nbLignes);
 
     // TODO : remplir le tableau avec des cookies au hasard
-    for(let l=0; l<this.nbLignes; l++){
-      for(let c=0; c<this.nbColonnes; c++){
-        let type=Math.floor(nbDeCookiesDifferents * Math.random());
-        let cookie;
-        switch (type){
+    for (let l = 0; l < this.nbLignes; l++) {
+      for (let c = 0; c < this.nbColonnes; c++) {
+        let type = Math.floor(nbDeCookiesDifferents * Math.random()); // valeur aléatoire entre 0 et nbDeCookiesDifferents
+        let cookie; // = new Cookie(type, l, c, image)
+        switch (type) {
           case 0:
-            cookie = new Cookie(type,l,c,this.assets.croissant);
+            cookie = new Cookie(type, l, c, this.assets.croissant);
             break;
           case 1:
-            cookie = new Cookie(type,l,c,this.assets.cupcake);
+            cookie = new Cookie(type, l, c, this.assets.cupcake);
             break;
           case 2:
-            cookie = new Cookie(type,l,c,this.assets.danish);
+            cookie = new Cookie(type, l, c, this.assets.danish);
             break;
           case 3:
-            cookie = new Cookie(type,l,c,this.assets.donut);
+            cookie = new Cookie(type, l, c, this.assets.donut);
             break;
           case 4:
-            cookie = new Cookie(type,l,c,this.assets.macaroon);
+            cookie = new Cookie(type, l, c, this.assets.macaroon);
             break;
           case 5:
-            cookie = new Cookie(type,l,c,this.assets.sugarCookie);
+            cookie = new Cookie(type, l, c, this.assets.sugarCookie);
             break;
         }
-        this.tabCookies[l][c]=cookie;
+        this.tabCookies[l][c] = cookie;
       }
     }
   }

@@ -4,12 +4,13 @@
    let arr = []) puis ensuite pour chacune des lignes du tableau, on lui affecte un autre
    tableau (arr[i] = [] ci-dessous) */
 
-function create2DArray(rows) {
-  let arr = [];
-
-  for (let i = 0; i < rows; i++) {
-    arr[i] = [];
+   function create2DArray(rows) {
+    let arr = [];
+  
+    for (let i = 0; i < rows; i++) {
+      arr[i] = [];
+    }
+  
+    return arr;
   }
-
-  return arr;
-}
+  
