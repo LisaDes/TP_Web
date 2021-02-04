@@ -34,8 +34,8 @@ function startGame(assetsLoaded) {
 }
 
 function traiteMouseDown(event) {
-  //console.log("Souris cliquée bouton = " + event.button);
-  //console.log("souris clickée " + mousePos.x + " " + mousePos.y);
+  console.log("Souris cliquée bouton = " + event.button);
+  console.log("souris clickée " + mousePos.x + " " + mousePos.y);
   switch (userState) {
     case "cookieEnDrag":
     case "rien":
@@ -45,19 +45,27 @@ function traiteMouseDown(event) {
       userState = "cookieEnDrag";
 
       cookieDraggee = grille.getCookie(mousePos.x, mousePos.y);
+
+      console.log(
+        "on essaie d echanger avec une cookie de type : " + cookieDraggee.type
+      );
+      console.log(cookieDragguee.type);
+      grille.cookiesCliquees.push(cookieDragguee);
+      console.log(grille.cookiesCliquees[0]);
   }
 }
 
 function traiteMouseUp(event) {
-  console.log("Souris relâchée bouton = " + event.button);
-  console.log("souris relâchée " + mousePos.x + " " + mousePos.y);
+  //console.log("Souris relâchée bouton = " + event.button);
+  //console.log("souris relâchée " + mousePos.x + " " + mousePos.y);
   switch (userState) {
     case "cookieEnDrag":
       cookieCible = grille.getCookie(mousePos.x, mousePos.y);
       // regarder si on peut swapper ? ou si on est pas trop loin....
-      console.log(
+      /*console.log(
         "on essaie d echanger avec une cookie de type : " + cookieCible.type
-      );
+      );*/
+      //Cookie.swap()
       userState = "rien";
       break;
     case "rien":

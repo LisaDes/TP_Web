@@ -80,6 +80,24 @@ class Grille {
     return this.tabCookies[l][c];
   }
 
+  swapCookies() {
+    let cookie1 = this.tabCookiesCliquees[0];
+    let cookie2 = this.tabCookiesCliquees[1];
+
+    let tmpType = cookie1.type;
+    let tmpImgSrc = cookie1.htmlImage.src;
+
+    cookie1.type = cookie2.type;
+    cookie1.htmlImage.src = cookie2.htmlImage.src;
+
+    cookie2.type = tmpType;
+    cookie2.htmlImage.src = tmpImgSrc;
+
+    // on a swappé, est-ce qu'on a un ou plusieurs alignement ?
+    //this.detecteTousLesAlignements();
+  
+  }
+
   /**
    * Initialisation du niveau de départ. Le paramètre est le nombre de cookies différents
    * dans la grille. 4 types (4 couleurs) = facile de trouver des possibilités de faire
