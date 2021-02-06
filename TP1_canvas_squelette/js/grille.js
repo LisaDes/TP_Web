@@ -77,25 +77,28 @@ class Grille {
     let c = Math.floor(x / this.largeurColonnes);
     let l = Math.floor(y / this.hauteurLignes);
 
+    
     return this.tabCookies[l][c];
   }
 
   swapCookies() {
-    let cookie1 = this.tabCookiesCliquees[0];
-    let cookie2 = this.tabCookiesCliquees[1];
+    ctx.save();
+    let cookie1 = this.cookiesCliquees[0];
+    let cookie2 = this.cookiesCliquees[1];
 
     let tmpType = cookie1.type;
-    let tmpImgSrc = cookie1.htmlImage.src;
+    let tmpImgSrc = cookie1.image;
 
     cookie1.type = cookie2.type;
-    cookie1.htmlImage.src = cookie2.htmlImage.src;
+    cookie1.image = cookie2.image;
 
     cookie2.type = tmpType;
-    cookie2.htmlImage.src = tmpImgSrc;
+    cookie2.image = tmpImgSrc;
 
+    this.cookiesCliquees = [];
     // on a swappé, est-ce qu'on a un ou plusieurs alignement ?
     //this.detecteTousLesAlignements();
-  
+    ctx.restore();
   }
 
   /**

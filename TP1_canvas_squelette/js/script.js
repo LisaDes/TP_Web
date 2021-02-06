@@ -8,7 +8,7 @@ let grille;
 let canvas, ctx, canvasLargeur, canvasHauteur;
 let mousePos = {};
 let userState = "rien";
-let cookieDragguee = null;
+let cookieDraggee = null;
 
 function init() {
   console.log("Page et ressources prêtes à l'emploi");
@@ -44,14 +44,17 @@ function traiteMouseDown(event) {
       // puis on va changer l'état pour "cookieEnDrag"
       userState = "cookieEnDrag";
 
-      cookieDraggee = grille.getCookie(mousePos.x, mousePos.y);
+      let cookieDraggueeTest = grille.getCookie(mousePos.x, mousePos.y);
+      
+      cookieDraggee = cookieDraggueeTest;
+
+      
 
       console.log(
         "on essaie d echanger avec une cookie de type : " + cookieDraggee.type
       );
-      console.log(cookieDragguee.type);
-      grille.cookiesCliquees.push(cookieDragguee);
-      console.log(grille.cookiesCliquees[0]);
+      grille.cookiesCliquees.push(cookieDraggee);
+      
   }
 }
 
@@ -61,11 +64,13 @@ function traiteMouseUp(event) {
   switch (userState) {
     case "cookieEnDrag":
       cookieCible = grille.getCookie(mousePos.x, mousePos.y);
+      //console.log(cookieCible);
+      grille.cookiesCliquees.push(cookieCible);
       // regarder si on peut swapper ? ou si on est pas trop loin....
       /*console.log(
         "on essaie d echanger avec une cookie de type : " + cookieCible.type
       );*/
-      //Cookie.swap()
+      grille.swapCookies();
       userState = "rien";
       break;
     case "rien":
