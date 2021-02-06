@@ -39,4 +39,54 @@ class Cookie {
     console.log("Distance = " + distance);
     return distance;
   }
+
+  selectionne() {
+    // on change l'image et la classe CSS
+    //this.htmlImage.classList.add("cookies-selected");  
+    switch (this.type) {
+      case 0:
+        this.image = grille.assets.croissantHighlighted;
+        break;
+      case 1:
+        this.image = grille.assets.cupcakeHighlighted;
+        break;
+      case 2:
+        this.image = grille.assets.danishHighlighted;
+        break;
+      case 3:
+        this.image = grille.assets.donutHighlighted;
+        break;
+      case 4:
+        this.image = grille.assets.macaroonHighlighted;
+        break;
+      case 5:
+        this.image = grille.assets.sugarCookieHighlighted;
+        break;
+    }
+  }
+
+  deselectionne() {
+    // on change l'image et la classe CSS
+    this.image.classList.add("cookies-selected");  
+    switch (this.type) {
+      case 0:
+        this.image = grille.assets.croissant;
+        break;
+      case 1:
+        this.image = grille.assets.cupcake;
+        break;
+      case 2:
+        this.image = grille.assets.danish;
+        break;
+      case 3:
+        this.image = grille.assets.donut;
+        break;
+      case 4:
+        this.image = grille.assets.macaroon;
+        break;
+      case 5:
+        this.image = grille.assets.sugarCookie;
+        break;
+    }
+  }
 }

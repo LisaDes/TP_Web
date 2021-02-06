@@ -29,8 +29,18 @@ function startGame(assetsLoaded) {
   canvas.onmousedown = traiteMouseDown;
   canvas.onmouseup = traiteMouseUp;
   canvas.onmousemove = traiteMouseMove;
+  canvas.onclick = traiteClick;
 
   requestAnimationFrame(animationLoop);
+}
+
+function traiteClick(event) {
+  let cookieClick = grille.getCookie(mousePos.x, mousePos.y);
+  
+  grille.cookiesCliquees.push(cookieClick);
+
+  //cookieClick.selectionne();
+
 }
 
 function traiteMouseDown(event) {
@@ -47,8 +57,6 @@ function traiteMouseDown(event) {
       let cookieDraggueeInt = grille.getCookie(mousePos.x, mousePos.y);
       
       cookieDraggee = cookieDraggueeInt;
-
-      
 
       console.log(
         "on essaie d echanger avec une cookie de type : " + cookieDraggee.type
