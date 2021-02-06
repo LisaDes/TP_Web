@@ -81,6 +81,13 @@ class Grille {
     return this.tabCookies[l][c];
   }
 
+  swapPossible() {
+    let cookie1 = this.cookiesCliquees[0];
+    let cookie2 = this.cookiesCliquees[1];
+
+    return Cookie.distance(cookie1, cookie2) === 1;
+  }
+
   swapCookies() {
     ctx.save();
     let cookie1 = this.cookiesCliquees[0];

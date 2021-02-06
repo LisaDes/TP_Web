@@ -44,9 +44,9 @@ function traiteMouseDown(event) {
       // puis on va changer l'état pour "cookieEnDrag"
       userState = "cookieEnDrag";
 
-      let cookieDraggueeTest = grille.getCookie(mousePos.x, mousePos.y);
+      let cookieDraggueeInt = grille.getCookie(mousePos.x, mousePos.y);
       
-      cookieDraggee = cookieDraggueeTest;
+      cookieDraggee = cookieDraggueeInt;
 
       
 
@@ -70,7 +70,13 @@ function traiteMouseUp(event) {
       /*console.log(
         "on essaie d echanger avec une cookie de type : " + cookieCible.type
       );*/
-      grille.swapCookies();
+      if(grille.swapPossible()){
+        grille.swapCookies();
+      }
+      else {
+        console.log("Non, batard");
+        grille.cookiesCliquees = [];
+      }
       userState = "rien";
       break;
     case "rien":
